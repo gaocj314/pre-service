@@ -1,4 +1,4 @@
-package com.yonyou.cap.preservicegs.util;
+package com.yonyou.cap.preservicegs.util.ftp;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,6 +11,7 @@ import java.io.RandomAccessFile;
 
 import com.yonyou.cap.preservicegs.enums.DownloadStatus;
 import com.yonyou.cap.preservicegs.enums.UploadStatus;
+import com.yonyou.cap.preservicegs.util.Constants;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
