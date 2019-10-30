@@ -25,4 +25,13 @@ public final class Constants {
 
 	//光闸数据资源子传入目录
 	public static final String IN="in";
+
+	//FTP ip
+	public static final String FTP_HOST="192.168.0.170";
+
+	//FTP name
+	public static final String FTP_USER="gaocj";
+
+	//FTP password
+	public static final String FTP_PW="123456";
 }
