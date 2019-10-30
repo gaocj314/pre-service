@@ -1,0 +1,8 @@
+server:
+  port: 7070 #配置项目端口
+  servlet:
+    context-path: /pre-service #配置项目访问名称
+
+
+config:
+  name: Hello Spring Boot!
