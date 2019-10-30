@@ -10,6 +10,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebListener
@@ -19,17 +21,22 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        final File file = new File(Constants.FTP_TRANSFER);
+        listenTransfer();
+        listenFgap();
+    }
+
+    public void listenTransfer(){
+        File transfer = new File(Constants.FTP_TRANSFER);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new WatchDir(file, true, new FileActionCallback() {
+                    new WatchDir(transfer, true, new FileActionCallback() {
                         @Override
                         public void create(File file) {
                             try {
                                 logger.info("新建文件{}",file.getAbsolutePath());
-                                checkFileWritingOn(file);
+                                checkFileWritingOn(file,1);
                             }catch (Exception e){
                                 logger.error("文件MD5校验异常:", e);
                             }
@@ -48,10 +55,43 @@ public class ContextListener implements ServletContextListener {
                 }
             }
         }).start();
-        logger.info("正在监视文件夹:{}", file.getAbsolutePath());
+        logger.info("正在监视文件夹:{}", transfer.getAbsolutePath());
     }
 
-    public void checkFileWritingOn(File file) throws Exception{
+    public void listenFgap(){
+        File fgap = new File(Constants.FTP_FGAP.concat("/").concat(Constants.IN));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new WatchDir(fgap, true, new FileActionCallback() {
+                        @Override
+                        public void create(File file) {
+                            try {
+                                logger.info("新建文件{}",file.getAbsolutePath());
+                                checkFileWritingOn(file,2);
+                            }catch (Exception e){
+                                logger.error("文件MD5校验异常:", e);
+                            }
+                        }
+                        @Override
+                        public void delete(File file) {
+                            System.out.println("文件已删除" + file.getAbsolutePath());
+                        }
+                        @Override
+                        public void modify(File file) {
+                            System.out.println("文件已修改" + file.getAbsolutePath());
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        logger.info("正在监视文件夹:{}", fgap.getAbsolutePath());
+    }
+
+    public void checkFileWritingOn(File file,int type) throws Exception{
         long oldLen = 0;
         long newLen = 0;
         while(true){
@@ -65,8 +105,13 @@ public class ContextListener implements ServletContextListener {
                 String fileName = file.getName();
                 String subFileName = fileName.substring(0,fileName.lastIndexOf("."));
                 if(fileMD5Str.equals(subFileName)){
-                    logger.info("{}文件MD5校验通过,开始复制到光闸传输目录",fileName);
-                    copyFile(file.getAbsolutePath(),Constants.FTP_FGAP.concat("/").concat(Constants.OUT).concat("/").concat(fileName));
+                    if(type==1){
+                        logger.info("{}文件MD5校验通过,开始复制到光闸传输目录",fileName);
+                        copyFile(file.getAbsolutePath(),Constants.FTP_FGAP.concat("/").concat(Constants.OUT).concat("/").concat(fileName));
+                    }else if(type==2){
+                        logger.info("同步各业务平台");
+                    }
+
                 }else{
                     logger.info("{}文件MD5校验失败",fileName);
                 }
