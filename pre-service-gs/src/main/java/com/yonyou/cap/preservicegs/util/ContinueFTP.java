@@ -312,7 +312,7 @@ public class ContinueFTP {
             // System.out.println(myFtp.upload("E:\\yw.flv", "/yw.flv",5));
             // System.out.println(myFtp.upload("E:\\爱你等于爱自己.mp4","/爱你等于爱自己.mp4"));
             //System.out.println(myFtp.download("/爱你等于爱自己.mp4", "E:\\爱你等于爱自己.mp4"));
-            System.out.println(myFtp.upload("E:/安装包/IntelliJ IDEA 2018.3.6.zip","/transfer/test/idea.zip"));
+            System.out.println(myFtp.upload("F:/mediaFile.zip","/transfer/test/mediaFile.zip"));
             //System.out.println(myFtp.download("/transfer/test/mediaFile.zip","F:/test/mediaFile.zip"));
             myFtp.disconnect();
         } catch (IOException e) {

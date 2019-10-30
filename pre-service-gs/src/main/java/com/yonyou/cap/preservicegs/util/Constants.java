@@ -27,7 +27,7 @@ public final class Constants {
 	public static final String IN="in";
 
 	//FTP ip
-	public static final String FTP_HOST="192.168.0.170";
+	public static final String FTP_HOST="192.168.0.178";
 
 	//FTP name
 	public static final String FTP_USER="gaocj";
