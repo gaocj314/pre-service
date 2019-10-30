@@ -10,7 +10,7 @@
 package com.yonyou.cap.preservicegs.util;
 
 /**
- * <p> 概述：系统常量工具类
+ *系统常量工具类
  */
 public final class Constants {
 
