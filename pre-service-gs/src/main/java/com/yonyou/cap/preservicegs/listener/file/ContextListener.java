@@ -1,4 +1,4 @@
-package com.yonyou.cap.preservicegs.listener;
+package com.yonyou.cap.preservicegs.listener.file;
 
 import com.yonyou.cap.preservicegs.util.Constants;
 import com.yonyou.cap.preservicegs.util.MD5Util;
@@ -10,8 +10,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.io.File;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @WebListener
