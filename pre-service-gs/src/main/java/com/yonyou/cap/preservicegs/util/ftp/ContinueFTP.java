@@ -21,9 +21,7 @@ import org.apache.commons.net.ftp.FTPReply;
 
 /**
  * 支持断点续传的FTP实用类
- *
  * @author gaocj
- * @version 0.3 实现中文目录创建及中文文件创建，添加对于中文的支持
  */
 public class ContinueFTP {
     public FTPClient ftpClient = new FTPClient();

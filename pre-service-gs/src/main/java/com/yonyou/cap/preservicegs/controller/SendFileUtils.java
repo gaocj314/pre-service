@@ -23,7 +23,7 @@ public class SendFileUtils {
     }
 
     /**
-     * 发送日志文件方法
+     * 发送文件方法
      * @param url 接收文件接口连接
      * @param file  发送文件
      */

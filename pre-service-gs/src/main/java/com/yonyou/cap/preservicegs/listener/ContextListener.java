@@ -21,7 +21,9 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
+        //监听业务平台的数据包
         listenTransfer();
+        //监听光闸传入的数据包
         listenFgap();
     }
 
@@ -98,7 +100,7 @@ public class ContextListener implements ServletContextListener {
             newLen = file.length();
             if ((newLen - oldLen) > 0) {
                 oldLen = newLen;
-                Thread.sleep(2000);
+                Thread.sleep(5000);//5s内文件大小未发生变化,认为文件已传输完毕
             } else {
                 logger.info("文件传输完成,总大小为{}",newLen);
                 String fileMD5Str = MD5Util.getFileMD5String(file);
@@ -106,12 +108,11 @@ public class ContextListener implements ServletContextListener {
                 String subFileName = fileName.substring(0,fileName.lastIndexOf("."));
                 if(fileMD5Str.equals(subFileName)){
                     if(type==1){
-                        logger.info("{}文件MD5校验通过,开始复制到光闸传输目录",fileName);
+                        logger.info("{}文件MD5校验通过,开始复制到光闸传输out目录",fileName);
                         copyFile(file.getAbsolutePath(),Constants.FTP_FGAP.concat("/").concat(Constants.OUT).concat("/").concat(fileName));
                     }else if(type==2){
-                        logger.info("同步各业务平台");
+                        logger.info("光闸摆渡传入in目录...");
                     }
-
                 }else{
                     logger.info("{}文件MD5校验失败",fileName);
                 }
@@ -130,10 +131,9 @@ public class ContextListener implements ServletContextListener {
                 newpaths.delete();
                 Files.copy(oldpaths.toPath(), newpaths.toPath());
             }
-            logger.info("文件已复制到光闸同步目录中");
-        }
-        catch (Exception e) {
-            logger.error("复制单个文件操作出错", e);
+            logger.info("文件已复制到光闸out同步目录中");
+        }catch (Exception e) {
+            logger.error("复制文件操作出错", e);
         }
     }
 }
