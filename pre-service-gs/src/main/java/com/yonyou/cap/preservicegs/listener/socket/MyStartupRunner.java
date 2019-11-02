@@ -16,11 +16,13 @@ public class MyStartupRunner implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception{
-        FileUpLoadServer fileUpLoadServer = null;
-        if (null == fileUpLoadServer) {
-            fileUpLoadServer = new FileUpLoadServer(Constants.SocketServer.SERVER_PORT);
+        if ("instart".equals(Constants.SocketServer.IS_START_SERVER)) {
+            FileUpLoadServer fileUpLoadServer = null;
+            if (null == fileUpLoadServer) {
+                fileUpLoadServer = new FileUpLoadServer(Constants.SocketServer.SERVER_PORT);
+            }
+            fileUpLoadServer.load();
+            LOG.info("Socket Server init, Port is {}",  Constants.SocketServer.SERVER_PORT);
         }
-        fileUpLoadServer.load();
-        LOG.info("Socket Server init, Port is {}",  Constants.SocketServer.SERVER_PORT);
     }
 }

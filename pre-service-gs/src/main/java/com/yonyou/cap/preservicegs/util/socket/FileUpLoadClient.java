@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.yonyou.cap.preservicegs.listener.socket.FinalVariables;
+import com.yonyou.cap.preservicegs.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -209,7 +209,7 @@ public class FileUpLoadClient extends Socket{
 
     public static void main(String[] args) {
         try{
-            FileUpLoadClient fileUpLoadClient = new FileUpLoadClient(FinalVariables.SERVER_IP, FinalVariables.SERVER_PORT);
+            FileUpLoadClient fileUpLoadClient = new FileUpLoadClient(Constants.SocketServer.SERVER_IP, Constants.SocketServer.SERVER_PORT);
             fileUpLoadClient.sendFile("F:/mediaFile.zip");
         }catch (Exception e){
            e.printStackTrace();
