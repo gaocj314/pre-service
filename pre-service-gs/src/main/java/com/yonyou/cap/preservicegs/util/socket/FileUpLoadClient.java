@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * Client端<br><br>
  * 功能说明：文件上传（断点）传输
  *
- * @author      CSDN:seesun2012
+ * @author      gaocj
  * @CreateDate  2017年08月18日
  * @Override    2017年11月07日
  * @version     1.1
@@ -211,8 +211,6 @@ public class FileUpLoadClient extends Socket{
         try{
             FileUpLoadClient fileUpLoadClient = new FileUpLoadClient(FinalVariables.SERVER_IP, FinalVariables.SERVER_PORT);
             fileUpLoadClient.sendFile("F:/mediaFile.zip");
-           // fileUpLoadClient.statusInfo();
-           // fileUpLoadClient.quit();
         }catch (Exception e){
            e.printStackTrace();
         }
