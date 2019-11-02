@@ -12,26 +12,35 @@ package com.yonyou.cap.preservicegs.util;
 /**
  *系统常量工具类
  */
-public final class Constants {
+public interface Constants {
 
 	//业务平台ftp数据资源传入目录
-	public static final String FTP_TRANSFER="G:/ftpservre/transfer";
+	String FTP_TRANSFER="G:/ftpservre/transfer";
 
 	//光闸数据资源传入目录
-	public static final String FTP_FGAP="G:/ftpservre/fgap";
+	String FTP_FGAP="G:/ftpservre/fgap";
 
 	//光闸数据资源子传出目录
-	public static final String OUT="out";
+	 String OUT="out";
 
 	//光闸数据资源子传入目录
-	public static final String IN="in";
+     String IN="in";
 
 	//FTP ip
-	public static final String FTP_HOST="192.168.0.178";
+    String FTP_HOST="192.168.0.178";
 
 	//FTP name
-	public static final String FTP_USER="gaocj";
+    String FTP_USER="gaocj";
 
 	//FTP password
-	public static final String FTP_PW="123456";
+	 String FTP_PW="123456";
+
+	 class SocketServer{
+		 //  服务端IP
+		 public  static final String SERVER_IP = "127.0.0.1";
+		 //  服务端端口
+		 public  static final int SERVER_PORT = 10001;
+		 //  开启配置
+		 public  static final  String IS_START_SERVER = "instart";
+	 }
 }
